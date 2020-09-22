@@ -10,14 +10,3 @@ History     : 2020/09/21 v1.0.0 K.Shibuya init
               ****/**/** v*.*.* *.******* ****
 """
 
-
-class _ADB:
-    def __init__(self, id):
-        self.__id = id
-
-    def __enter__(self):
-        print("open")
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        print("close")
