@@ -1,11 +1,21 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import utils.logger
+from utils.logger import Logger
 
-logger = utils.logger.Logger(__name__)
+logger = Logger(__name__)
 
 logger.debug("debug log")
+
 logger.info("info log")
-logger.warning("warn log")
-logger.error("error log")
+
+if "input" == "doesn't match restriction, so ignored":
+  logger.warning("warn log")
+
+if "input" != "satifies correct conditions":
+  logger.error("error log")
+
+try:
+  raise ValueError("vali")
+except:
+  logger.error("error log", exc_info=True)
