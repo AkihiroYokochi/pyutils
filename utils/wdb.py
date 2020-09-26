@@ -10,7 +10,11 @@ History     : 2020/09/21 v1.0.0 K.Shibuya init
               ****/**/** v*.*.* *.******* ****
 """
 from utils.config import Config
+from utils.logger import Logger
 import MySQLdb
+import json
+
+logger = Logger(__name__)
 
 
 class WDB:
@@ -43,6 +47,8 @@ class WDB:
         self._param[key] = value
 
     def execute(self):
+        logger.debug("[SQL]" + self._sql)
+        logger.debug("[Parameters]" + json.dumps(self._param))
         self._cursor.execute(self._sql, self._param)
         return self._cursor.fetchall()
 
