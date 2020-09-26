@@ -12,20 +12,26 @@ History     : 2020/09/21 v1.0.0 K.Shibuya init
               ****/**/** v*.*.* *.******* ****
 """
 
-from .config import Config
+from utils.config import Config
 import logging
 import logging.handlers
 
 # 出力レベル
 _level = Config["Log"]["level"]
 if _level not in ["DEBUG", "INFO", "WARN", "WARNING", "ERROR"]:
-  _level = "INFO"
+    _level = "INFO"
 
 # フォーマット
-_format = logging.Formatter(fmt="%(asctime)s [%(filename)s:%(lineno)d] %(levelname)-8s %(message)s")
+_format = logging.Formatter(
+    fmt="%(asctime)s [%(filename)s:%(lineno)d] %(levelname)-8s %(message)s"
+)
 
 # 出力先
-_fileHandler = logging.handlers.RotatingFileHandler(filename=Config["Log"]["dir"] + Config["Log"]["file"], maxBytes=int(Config["Log"]["maxBytes"].replace(",", "")), backupCount=1)
+_fileHandler = logging.handlers.RotatingFileHandler(
+    filename=Config["Log"]["dir"] + Config["Log"]["file"],
+    maxBytes=int(Config["Log"]["maxBytes"].replace(",", "")),
+    backupCount=1,
+)
 
 # ルートロガー
 _root_logger = logging.getLogger()
