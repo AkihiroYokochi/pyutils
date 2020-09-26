@@ -21,6 +21,7 @@ class WDB:
             user=Config[db_sec]["user"],
             passwd=Config[db_sec]["passwd"],
         )
+        self._connection.autocommit(False)
         self._cursor = self._connection.cursor()
         self._sql = ""
         self._param = {}
@@ -33,7 +34,7 @@ class WDB:
         self._connection.close()
 
     def beginTran(self):
-        self._connection.beginTran()
+        self.rollbackTran()
 
     def addQuery(self, sql):
         self._sql += sql
@@ -44,3 +45,9 @@ class WDB:
     def execute(self):
         self._cursor.execute(self._sql, self._param)
         return self._cursor.fetchall()
+
+    def commitTran(self):
+        self._connection.commit()
+
+    def rollbackTran(self):
+        self._connection.rollback()
