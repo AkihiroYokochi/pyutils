@@ -1,9 +1,19 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+Module      : sample
+Function    : サンプル
+Author      : K.Shibuya
+Version     : 2020/09/21 v1.0.0
+History     : 2020/09/21 v1.0.0 K.Shibuya init
+              ****/**/** v*.*.* *.******* ****
+"""
+
+
 from utils.logger import Logger
 from utils.wdb import WDB
-import utils.wdb
+
 
 logger = Logger(__name__)
 
@@ -22,6 +32,10 @@ try:
         wdb.addQuery("select * from T_SAMPLE")
         data = wdb.execute()
         print(data)
-    raise ValueError("vali")
+        wdb.addQuery("insert into T_SAMPLE values (3, 'ghi')")
+        data = wdb.execute()
+        print(data)
+        wdb.commitTran()
+    # raise ValueError("vali")
 except:
     logger.error("error log", exc_info=True)
